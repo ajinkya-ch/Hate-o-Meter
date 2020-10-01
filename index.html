@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hate-O-Meter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="static/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="main.js"></script>
+    	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+	
+</head>
+<style>
+p.excerpt{ 
+color:'black', 
+border-top-width: 2px;  
+border-right-width: 2px;  
+border-bottom-width: 2px;  
+border-left-width: 2px;  
+border-top-style: solid;  
+border-right-style: solid;  
+border-bottom-style: solid;  
+border-left-style: solid;  
+border-top-color: 'black';  
+border-right-color: 'black';  
+border-bottom-color: 'black';  
+border-left-color: 'black';  
+p.excerpt{  
+border: 2px solid black;  
+background-color:#FFCC33;  
+}
+p.excerpt{  
+border: 2px solid #0066FF;  
+background-color:#FFCC33;  
+padding:5px;  
+margin-top:5px;  
+margin-bottom:5px;  
+margin-left:20px;  
+margin-right:20px;  
+}
+p.excerpt{  
+border: 2px solid #0066FF;  
+background-color:#FFCC33;  
+padding: 5px;  
+}
+
+}
+body {
+background-color:lightblue;
+}
+</style>
+<script>
+window.onload = function () {
+var prediction='{{prediction}}'
+var chart1 = new CanvasJS.Chart("chartContainer1", {
+	animationEnabled: true,
+	backgroundColor: "#ADD8E6",
+	title:{
+		text:"Hate Percentage"
+	},
+	
+	data: [{
+		type: "bar",
+		name: "Percentage",
+		
+		color: "#014D65",
+		dataPoints: [
+			{ y: +prediction, label: "Hate Percentage" },
+			
+		]
+	}]
+});
+chart1.render();
+
+
+r='{{religion}}'
+d='{{dis}}'
+e='{{eth}}'
+g='{{gender}}'
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	backgroundColor: "#ADD8E6",
+	theme: "light1", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "Category Table"
+	},
+	axisY: {
+		title: "Count"
+	},
+	data: [{        
+		type: "column",  
+		showInLegend: true, 
+		legendMarkerColor: "grey",
+	
+		dataPoints: [      
+			{ y: +r, label: "Religion" },
+			{ y: +g,  label: "Gender" },
+			{ y: +e,  label: "Ethinicity" },
+			{ y: +d,  label: "Disabilities" },
+	
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="/">Hate-O-Meter</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="/contact">Contact</a>
+      </li>
+
+
+    </ul>
+   
+  </div>
+</nav>
+<br/>
+<br/>
+<br/>
+    <div class="container">
+        
+        <form method="post" action="/process">
+        <h1>How To Use</h1>
+    <p class="excerpt">Hate-o-meter is simple to use! You can input three possible forms of text i.e single line text, mutli line text or an url. Select your option and enter input. Then select th ‘check percent’ option. We have designed our algorithm to predict the percent of hate in your input. The amount of percentage will be displayed below. Additionally, if your text is targeting a category from our tool, it will be displayed too. Check the ‘About’ tab for more information.
+</p>
+<p>**THIS IS STILL IN DEVELOPMENT PHASE**</p>
+<br>
+            <div class="form-group">
+                    
+                    <input type="radio" name="type" value="rawtext" > rawText
+		<input type="radio" name="type" value="url"> URL
+		<div></div>
+	
+		<div id="rawtext" style="display: none">
+            <textarea type="text" rows="15" cols="3" class="form-control"  name="rawtext" required="true" >    </textarea>
+            </div>
+          	<div id="url" style="display: none">
+            <textarea type="text" rows="1" cols="3" class="form-control"  name="urltext" required="true" >   </textarea>
+            </div>
+            <br/>
+
+        
+            <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
+	<button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Find pecentage</button>
+
+ 
+
+
+         
+        </div>
+        </form>
+                 
+                 
+
+    </div>
+
+    <div class="container">
+    	
+        <p class="alert-heading">	</p>
+ 
+     
+        	
+        	
+    	
+        
+        <p>TEXT:{{text}}</p>
+       
+       
+    	
+   <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+ <br>
+   <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<!--<div id="chart_div" style="width: 900px; height: 500px;"></div>-->
+
+    </div>
+    
+    
+  
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+    $('input[name="type"]').on('click', function() {
+        if ($(this).val() == 'rawtext') {
+            $('#rawtext').show();
+        }
+        else {
+            $('#rawtext').hide();
+        }
+        if ($(this).val() == 'url') {
+            $('#url').show();
+        }
+        else {
+            $('#url').hide();
+        }
+        
+    });
+});
+        </script>
+        <script>
+
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	</script>
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>
