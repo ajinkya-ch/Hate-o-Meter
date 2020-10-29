@@ -1,8 +1,5 @@
-from __future__ import division, print_function
-from gensim import models
 from keras.callbacks import ModelCheckpoint
 from keras.layers import Dense, Dropout, Reshape, Flatten, concatenate, Input, Conv1D, GlobalMaxPooling1D, Embedding
-from keras.layers.recurrent import LSTM
 from keras.models import Sequential
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
