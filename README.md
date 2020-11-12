@@ -19,4 +19,15 @@ Guidelines to consider:
 3)	The API may crash or malfunction on receiving multiple requests in a row.
 
 
+- If you do use our tool, please do cite it as follows:
 
+### Citation
+
+@inproceedings{chaudhari2020cnn,
+  title={CNN based Hate-o-Meter: A Hate Speech Detecting Tool},
+  author={Chaudhari, Ajinkya and Parseja, Akshay and Patyal, Akshit},
+  booktitle={2020 Third International Conference on Smart Systems and Inventive Technology (ICSSIT)},
+  pages={940--944},
+  year={2020},
+  organization={IEEE}
+}
