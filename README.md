@@ -34,4 +34,4 @@ Guidelines to consider:
 
 ### Published Work
 
-Click [here]https://ieeexplore.ieee.org/document/9214247 to access the published research paper.
+Click [here](https://ieeexplore.ieee.org/document/9214247) to access the published research paper.
