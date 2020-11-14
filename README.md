@@ -31,3 +31,7 @@ Guidelines to consider:
   year={2020},
   organization={IEEE}
 }
+
+### Published Work
+
+Click [here]https://ieeexplore.ieee.org/document/9214247 to access the published research paper.
